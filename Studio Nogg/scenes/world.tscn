@@ -7,10 +7,12 @@
 
 [node name="Car" parent="." instance=ExtResource("1_jmupw")]
 position = Vector2(316, 249)
+rotation = 1.0472
 active = true
 
 [node name="Car2" parent="." instance=ExtResource("1_jmupw")]
-position = Vector2(320, 358)
+position = Vector2(800, 323)
+rotation = -0.523598
 
 [node name="Wall" parent="." instance=ExtResource("2_fd45m")]
 position = Vector2(599, -27)
@@ -29,7 +31,7 @@ position = Vector2(618, 176)
 scale = Vector2(3.375, 3.375)
 
 [node name="Wall6" parent="." instance=ExtResource("2_fd45m")]
-position = Vector2(614, 452)
+position = Vector2(611, 450)
 scale = Vector2(3.375, 3.375)
 
 [node name="Wall4" parent="." instance=ExtResource("2_fd45m")]
