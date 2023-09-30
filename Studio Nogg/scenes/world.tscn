@@ -1,7 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://bllghs4lerma6"]
+[gd_scene load_steps=3 format=3 uid="uid://bllghs4lerma6"]
 
-[ext_resource type="PackedScene" uid="uid://tclnfgg3powv" path="res://scenes/player.tscn" id="1_fekfk"]
+[ext_resource type="PackedScene" uid="uid://bedgbgwsu3eac" path="res://scenes/car.tscn" id="1_jmupw"]
+[ext_resource type="PackedScene" uid="uid://bf8vymefwolc4" path="res://scenes/wall.tscn" id="2_fd45m"]
 
 [node name="World" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_fekfk")]
+[node name="Car" parent="." instance=ExtResource("1_jmupw")]
+position = Vector2(316, 249)
+active = true
+
+[node name="Car2" parent="." instance=ExtResource("1_jmupw")]
+position = Vector2(320, 358)
+
+[node name="Wall" parent="." instance=ExtResource("2_fd45m")]
+position = Vector2(599, -27)
+scale = Vector2(25, 1)
+
+[node name="Wall2" parent="." instance=ExtResource("2_fd45m")]
+position = Vector2(586, 681)
+scale = Vector2(25, 1)
+
+[node name="Wall3" parent="." instance=ExtResource("2_fd45m")]
+position = Vector2(-36, 246)
+scale = Vector2(1, 25)
+
+[node name="Wall5" parent="." instance=ExtResource("2_fd45m")]
+position = Vector2(618, 176)
+scale = Vector2(3.375, 3.375)
+
+[node name="Wall6" parent="." instance=ExtResource("2_fd45m")]
+position = Vector2(614, 452)
+scale = Vector2(3.375, 3.375)
+
+[node name="Wall4" parent="." instance=ExtResource("2_fd45m")]
+position = Vector2(1187, 351)
+scale = Vector2(1, 25)
