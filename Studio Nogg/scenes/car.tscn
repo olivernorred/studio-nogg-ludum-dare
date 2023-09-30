@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bedgbgwsu3eac"]
+[gd_scene load_steps=9 format=3 uid="uid://bedgbgwsu3eac"]
 
-[ext_resource type="Script" path="res://scripts/car.gd" id="1_0a7ni"]
-[ext_resource type="Texture2D" uid="uid://c4207gbhyk71k" path="res://Sprite_Red_Car.png" id="2_r7x4w"]
+[ext_resource type="Script" path="res://scenes/car.gd" id="1_pqa7i"]
+[ext_resource type="Texture2D" uid="uid://dxetr446wd8an" path="res://Sprite_Cars.png" id="2_nh1p4"]
+[ext_resource type="Script" path="res://scenes/randomframe.gd" id="3_oluoh"]
+[ext_resource type="Script" path="res://scripts/driving_component.gd" id="4_gw64e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2wor"]
-size = Vector2(64, 32)
+size = Vector2(66, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fnrra"]
-size = Vector2(64, 32)
+size = Vector2(92, 29)
 
 [sub_resource type="Animation" id="Animation_8b25b"]
 resource_name = "new_animation"
@@ -41,11 +43,14 @@ _data = {
 }
 
 [node name="Car" type="CharacterBody2D"]
-script = ExtResource("1_0a7ni")
+motion_mode = 1
+script = ExtResource("1_pqa7i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("2_r7x4w")
+texture = ExtResource("2_nh1p4")
+hframes = 12
+script = ExtResource("3_oluoh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h2wor")
@@ -59,5 +64,8 @@ shape = SubResource("RectangleShape2D_fnrra")
 libraries = {
 "": SubResource("AnimationLibrary_kefo7")
 }
+
+[node name="DrivingComponent" type="Node2D" parent="."]
+script = ExtResource("4_gw64e")
 
 [connection signal="input_event" from="ClickChecker" to="." method="_on_click_checker_input_event"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://3h07o5qto35s"]
+
+[ext_resource type="Texture2D" uid="uid://rypgwpd1mh2j" path="res://Basic_Cement.png" id="1_2ukna"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hwguc"]
+texture = ExtResource("1_2ukna")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wgyai"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_hwguc")
+
+[node name="CementTiles" type="TileMap"]
+z_index = -2
+tile_set = SubResource("TileSet_wgyai")
+format = 2
