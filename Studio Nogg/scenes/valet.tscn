@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyo2okm1ofmoa"]
+
+[ext_resource type="Texture2D" uid="uid://44brmeh10a8f" path="res://sprites/whitesquare.png" id="1_kbh4k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umjc1"]
+size = Vector2(42, 44)
+
+[node name="Valet" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6875, 0.6875)
+texture = ExtResource("1_kbh4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_umjc1")

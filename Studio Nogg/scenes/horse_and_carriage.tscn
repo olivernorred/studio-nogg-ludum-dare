@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkmkobjgr7bjx"]
+
+[ext_resource type="Script" path="res://scripts/drivable.gd" id="1_5gfar"]
+[ext_resource type="Texture2D" uid="uid://44brmeh10a8f" path="res://sprites/whitesquare.png" id="2_b356i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwpxd"]
+size = Vector2(124, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yaoc"]
+size = Vector2(63, 64)
+
+[node name="HorseAndCarriage" type="Node2D"]
+
+[node name="Horse" type="CharacterBody2D" parent="." groups=["Vehicles"]]
+position = Vector2(19, 0)
+motion_mode = 1
+script = ExtResource("1_5gfar")
+active = true
+TURN_SPEED = null
+
+[node name="Sprite2D" type="Sprite2D" parent="Horse"]
+self_modulate = Color(0.843137, 0.619608, 0.490196, 1)
+position = Vector2(-18, -1)
+scale = Vector2(1.9375, 0.71875)
+texture = ExtResource("2_b356i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Horse"]
+position = Vector2(-18, -1)
+shape = SubResource("RectangleShape2D_bwpxd")
+
+[node name="Hitch" type="Marker2D" parent="Horse"]
+position = Vector2(32, 2)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Horse"]
+position = Vector2(-28.73, 0)
+rotation = 1.57079
+node_a = NodePath("..")
+node_b = NodePath("../../Carriage")
+disable_collision = false
+softness = 3.37
+
+[node name="Carriage" type="RigidBody2D" parent="."]
+position = Vector2(-96, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Carriage"]
+self_modulate = Color(0.556863, 0.556863, 0.556863, 1)
+position = Vector2(-34, 0)
+texture = ExtResource("2_b356i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Carriage"]
+position = Vector2(-34, 0)
+shape = SubResource("RectangleShape2D_1yaoc")

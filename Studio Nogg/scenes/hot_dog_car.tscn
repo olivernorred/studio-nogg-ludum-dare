@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfq0anxxih587"]
+
+[ext_resource type="PackedScene" uid="uid://bedgbgwsu3eac" path="res://scenes/car.tscn" id="1_si2h1"]
+[ext_resource type="Texture2D" uid="uid://dw82q1y36agpr" path="res://Sprite_Hotdog.png" id="2_ie5d1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7vp6"]
+radius = 15.0
+height = 92.0
+
+[node name="HotDogCar" instance=ExtResource("1_si2h1")]
+active = null
+TURN_SPEED = 0.01
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(28.0001, 0.000173569)
+texture = ExtResource("2_ie5d1")
+hframes = 1
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(27.0001, 0.000173569)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_n7vp6")
+
+[node name="ClickChecker" parent="." index="2"]
+position = Vector2(28.0001, 0.000173569)
+
+[node name="CollisionShape2D" parent="ClickChecker" index="0"]
+position = Vector2(-1, 1)
