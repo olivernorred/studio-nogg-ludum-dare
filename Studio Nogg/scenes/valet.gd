@@ -9,6 +9,13 @@ func check_vehicle():
 			interacted_with_vehicle.emit($VehicleChecker.get_collider())
 			print("vehicle interact")
 
+func handle_movement():
+	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+
+	velocity = velocity.move_toward(direction*speed, acceleration)
+	if velocity.length() > 0:
+		rotation = velocity.angle()
+
 func handle_animation():
 	if velocity.length() > 0:
 		$AnimationPlayer.play("walk")
