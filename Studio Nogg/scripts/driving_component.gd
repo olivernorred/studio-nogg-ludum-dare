@@ -22,8 +22,8 @@ func _physics_process(delta):
 		elif gear < 0:
 			speed = reverse_speed
 		
+		turn = Input.get_axis("left", "right")
 		if velocity.length() > 0:
-			turn = Input.get_axis("left", "right")
 			direction += turn * turn_speed * gear * speed/forward_speed
 		else:
 			turn = 0

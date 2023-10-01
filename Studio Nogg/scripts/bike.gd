@@ -13,7 +13,6 @@ func handle_animation():
 			
 	elif $DrivingComponent.turn > 0:
 		$AnimationPlayer.play("turn_right")
-	
+		
 	if !is_active:
 		$AnimationPlayer.play("empty")
-	

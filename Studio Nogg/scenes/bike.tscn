@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bql3y2wjilrqy"]
 
 [ext_resource type="Script" path="res://scripts/bike.gd" id="1_fxkee"]
-[ext_resource type="Texture2D" uid="uid://dgo4rmju1yill" path="res://BlueBike.png" id="2_u3714"]
+[ext_resource type="Texture2D" uid="uid://bjw8admti4g60" path="res://RedBike.png" id="2_ikkpe"]
 [ext_resource type="Script" path="res://scripts/driving_component.gd" id="3_7pkm4"]
 
 [sub_resource type="Animation" id="Animation_118je"]
@@ -119,8 +119,7 @@ script = ExtResource("1_fxkee")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, 0)
 rotation = 1.5708
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("2_u3714")
+texture = ExtResource("2_ikkpe")
 hframes = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
