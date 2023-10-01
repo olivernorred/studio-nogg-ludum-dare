@@ -4,4 +4,7 @@ class_name NPC extends Person
 
 
 func handle_movement():
-	
+	pass
+
+func automate_car():
+	controlled_car.path

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bllghs4lerma6"]
+[gd_scene load_steps=10 format=3 uid="uid://bllghs4lerma6"]
 
 [ext_resource type="PackedScene" uid="uid://bedgbgwsu3eac" path="res://scenes/car.tscn" id="1_jmupw"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_plyd2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://3h07o5qto35s" path="res://scenes/ground_tiles.tscn" id="5_jq3ah"]
 [ext_resource type="PackedScene" uid="uid://cyo2okm1ofmoa" path="res://scenes/valet.tscn" id="6_ec00g"]
 [ext_resource type="Script" path="res://scenes/Camera2D.gd" id="8_d8fbh"]
+[ext_resource type="PackedScene" uid="uid://b4kbftgyfbhwi" path="res://scenes/npc.tscn" id="9_gpsrh"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_plyd2")
@@ -35,7 +36,7 @@ position = Vector2(307, 89)
 rotation = -0.443013
 
 [node name="Bike" parent="." instance=ExtResource("5_5uw34")]
-position = Vector2(127, 370)
+position = Vector2(126, 369)
 
 [node name="Valet" parent="." instance=ExtResource("6_ec00g")]
 position = Vector2(334, 283)
@@ -49,6 +50,10 @@ position_smoothing_enabled = true
 editor_draw_limits = true
 script = ExtResource("8_d8fbh")
 current_target = NodePath("../Valet")
+
+[node name="NPC" parent="." node_paths=PackedStringArray("controlled_car") instance=ExtResource("9_gpsrh")]
+position = Vector2(801, 213)
+controlled_car = NodePath("../Car")
 
 [connection signal="eject_valet" from="Car" to="." method="_on_car_eject_valet"]
 [connection signal="eject_valet" from="Car2" to="." method="_on_car_eject_valet"]
