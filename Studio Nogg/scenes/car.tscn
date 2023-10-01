@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/drivable.gd" id="1_8jnr4"]
 [ext_resource type="Texture2D" uid="uid://dxetr446wd8an" path="res://Sprite_Cars.png" id="2_nh1p4"]
-[ext_resource type="Script" path="res://scenes/randomframe.gd" id="3_oluoh"]
+[ext_resource type="Script" path="res://scripts/randomframe.gd" id="3_i1spb"]
 [ext_resource type="Script" path="res://scripts/driving_component.gd" id="4_gw64e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2wor"]
@@ -11,7 +11,7 @@ size = Vector2(66, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fnrra"]
 size = Vector2(92, 29)
 
-[node name="Car" type="CharacterBody2D"]
+[node name="Car" type="CharacterBody2D" groups=["Vehicles"]]
 motion_mode = 1
 script = ExtResource("1_8jnr4")
 
@@ -19,7 +19,7 @@ script = ExtResource("1_8jnr4")
 rotation = 1.5708
 texture = ExtResource("2_nh1p4")
 hframes = 12
-script = ExtResource("3_oluoh")
+script = ExtResource("3_i1spb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h2wor")
@@ -31,5 +31,8 @@ shape = SubResource("RectangleShape2D_fnrra")
 
 [node name="DrivingComponent" type="Node2D" parent="."]
 script = ExtResource("4_gw64e")
+
+[node name="EntranceExitMarker" type="Marker2D" parent="."]
+position = Vector2(0, -28)
 
 [connection signal="input_event" from="ClickChecker" to="." method="_on_click_checker_input_event"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bql3y2wjilrqy"]
+[gd_scene load_steps=11 format=3 uid="uid://bql3y2wjilrqy"]
 
-[ext_resource type="Script" path="res://scenes/bike.gd" id="1_c7o6n"]
+[ext_resource type="Script" path="res://scripts/bike.gd" id="1_fxkee"]
 [ext_resource type="Texture2D" uid="uid://dgo4rmju1yill" path="res://BlueBike.png" id="2_u3714"]
 [ext_resource type="Script" path="res://scripts/driving_component.gd" id="3_7pkm4"]
 
@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 0, 2, 0]
+"values": [4, 1, 3, 1]
 }
 
 [sub_resource type="Animation" id="Animation_4pnq8"]
@@ -50,7 +50,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [5]
 }
 
 [sub_resource type="Animation" id="Animation_6lklw"]
@@ -67,7 +67,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_qd8rj"]
@@ -84,28 +84,47 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_ghpmv"]
+resource_name = "empty"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r503s"]
 _data = {
 "RESET": SubResource("Animation_4pnq8"),
+"empty": SubResource("Animation_ghpmv"),
 "idle": SubResource("Animation_qd8rj"),
 "ride": SubResource("Animation_118je"),
 "turn_left": SubResource("Animation_lsm74"),
 "turn_right": SubResource("Animation_6lklw")
 }
 
-[node name="Bike" type="CharacterBody2D"]
-script = ExtResource("1_c7o6n")
+[node name="Bike" type="CharacterBody2D" groups=["Vehicles"]]
+script = ExtResource("1_fxkee")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, 0)
 rotation = 1.5708
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_u3714")
-hframes = 5
+hframes = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(14, 0)
 polygon = PackedVector2Array(11, 9, -6, 3, -20, 2, -21, -2, -6, -2, -1, -5, 3, -5, 9, -10, 13, -2, 20, 0, 13, 2)
 
@@ -117,5 +136,9 @@ libraries = {
 [node name="DrivingComponent" type="Node2D" parent="."]
 position = Vector2(14, 0)
 script = ExtResource("3_7pkm4")
-can_reverse = false
-speed = 2.0
+forward_speed = 3.0
+reverse_speed = 1.0
+acceleration = 0.2
+
+[node name="EntranceExitMarker" type="Marker2D" parent="."]
+position = Vector2(13, -14)
