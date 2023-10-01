@@ -11,7 +11,7 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_hwguc")
 
-[node name="CementTiles" type="TileMap"]
+[node name="GroundTiles" type="TileMap"]
 z_index = -2
 tile_set = SubResource("TileSet_wgyai")
 format = 2
