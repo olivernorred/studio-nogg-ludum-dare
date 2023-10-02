@@ -23,8 +23,13 @@ func _physics_process(delta):
 
 func toggle_is_active():
 	is_active = !is_active
+	$DrivingComponent.is_active = is_active
+func make_active():
+	is_active = true
+	$DrivingComponent.is_active = is_active
+func make_inactive():
+	is_active = false
 	$DrivingComponent.is_active = is_active	
-	
 func check_exit_vehicle():
 	$DrivingComponent.velocity *= 0
 	toggle_is_active()

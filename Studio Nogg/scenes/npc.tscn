@@ -1,17 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4kbftgyfbhwi"]
+[gd_scene load_steps=5 format=3 uid="uid://b4kbftgyfbhwi"]
 
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_2qyl0"]
 [ext_resource type="Texture2D" uid="uid://44brmeh10a8f" path="res://sprites/whitesquare.png" id="2_prahg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcqm7"]
-size = Vector2(16, 40)
+size = Vector2(16, 24)
 
-[node name="NPC" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s77f8"]
+radius = 54.0
+
+[node name="NPC" type="CharacterBody2D" groups=["NPCs"]]
 script = ExtResource("1_2qyl0")
+speed = null
+acceleration = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.625)
+scale = Vector2(0.25, 0.375)
 texture = ExtResource("2_prahg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mcqm7")
+
+[node name="CarChecker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarChecker"]
+shape = SubResource("CircleShape2D_s77f8")
+
+[connection signal="body_entered" from="CarChecker" to="." method="_on_car_checker_body_entered"]

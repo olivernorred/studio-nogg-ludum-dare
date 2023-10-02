@@ -16,6 +16,5 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_oiul3")
 
 [node name="WallTiles" type="TileMap"]
-z_index = -1
 tile_set = SubResource("TileSet_wfhbf")
 format = 2

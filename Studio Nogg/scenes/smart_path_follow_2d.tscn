@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://jmpe1dubiw36"]
+
+[ext_resource type="Script" path="res://scripts/smart_path_follow_2d.gd" id="1_ehkwa"]
+
+[node name="SmartPathFollow2D" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_ehkwa")

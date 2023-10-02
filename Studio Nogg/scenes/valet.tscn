@@ -6,9 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umjc1"]
 size = Vector2(8, 8)
 
-[sub_resource type="Animation" id="Animation_q8ckd"]
-resource_name = "idle"
-length = 0.05
+[sub_resource type="Animation" id="Animation_16t1b"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -22,8 +21,9 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_16t1b"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_q8ckd"]
+resource_name = "idle"
+length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -73,7 +73,8 @@ hframes = 3
 shape = SubResource("RectangleShape2D_umjc1")
 
 [node name="VehicleChecker" type="RayCast2D" parent="."]
-target_position = Vector2(80, 0)
+scale = Vector2(0.625, 3.962)
+target_position = Vector2(50, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
