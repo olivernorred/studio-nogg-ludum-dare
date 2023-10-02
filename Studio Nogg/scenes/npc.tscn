@@ -11,8 +11,6 @@ radius = 54.0
 
 [node name="NPC" type="CharacterBody2D" groups=["NPCs"]]
 script = ExtResource("1_2qyl0")
-speed = null
-acceleration = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.375)
