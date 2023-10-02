@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk4ngkbuj616n"]
+
+[ext_resource type="Script" path="res://scenes/Menu.gd" id="1_b286y"]
+[ext_resource type="FontFile" uid="uid://drnsmlkfcp6yl" path="res://PixelifySans-Regular.ttf" id="2_bb20d"]
+[ext_resource type="Texture2D" uid="uid://bbejmwycsfi81" path="res://Play.png" id="3_3dx2n"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_b286y")
+next_scene = "res://scenes/world.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 460.0
+offset_bottom = 348.0
+color = Color(1, 0.462745, 0.34902, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 101.0
+offset_right = 400.0
+offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("2_bb20d")
+theme_override_font_sizes/font_size = 30
+text = "XTREME VALET SIMULATOR"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(205, 175)
+scale = Vector2(3.30556, 3.30556)
+texture = ExtResource("3_3dx2n")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 175.0
+offset_top = 158.0
+offset_right = 254.0
+offset_bottom = 193.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

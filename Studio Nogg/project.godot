@@ -11,10 +11,13 @@ config_version=5
 [application]
 
 config/name="Studio Nogg"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 run/max_fps=60
+boot_splash/image="res://NOGG SPLASH.png"
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
 
 [autoload]
 
