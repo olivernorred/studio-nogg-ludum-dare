@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfq0anxxih587"]
+
+[ext_resource type="Script" path="res://scripts/drivable.gd" id="1_whuyt"]
+[ext_resource type="Texture2D" uid="uid://dw82q1y36agpr" path="res://Sprite_Hotdog.png" id="2_0tubj"]
+[ext_resource type="Script" path="res://scripts/randomframe.gd" id="3_87ici"]
+[ext_resource type="Script" path="res://scripts/driving_component.gd" id="4_a88qo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2wor"]
+size = Vector2(66, 32)
+
+[node name="HotDogCar" type="CharacterBody2D" groups=["Vehicles"]]
+motion_mode = 1
+script = ExtResource("1_whuyt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(28.0001, 0.000173569)
+rotation = 1.5708
+texture = ExtResource("2_0tubj")
+script = ExtResource("3_87ici")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h2wor")
+
+[node name="DrivingComponent" type="Node2D" parent="."]
+script = ExtResource("4_a88qo")
+
+[node name="EntranceExitMarker" type="Marker2D" parent="."]
+position = Vector2(0, -28)

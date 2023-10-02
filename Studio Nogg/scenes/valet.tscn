@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyo2okm1ofmoa"]
+[gd_scene load_steps=11 format=3 uid="uid://cyo2okm1ofmoa"]
 
 [ext_resource type="Script" path="res://scenes/valet.gd" id="1_faarq"]
 [ext_resource type="Texture2D" uid="uid://cehd4ghyl0ssk" path="res://Sprite_Valet.png" id="2_r2t8k"]
@@ -60,8 +60,26 @@ _data = {
 "walk": SubResource("Animation_c0cx0")
 }
 
+[sub_resource type="Gradient" id="Gradient_6f1wt"]
+offsets = PackedFloat32Array(0, 0.674641)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8hu0w"]
+gradient = SubResource("Gradient_6f1wt")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okgie"]
+size = Vector2(39.5662, 1.314)
+
 [node name="Valet" type="CharacterBody2D"]
+scale = Vector2(2.305, 2.305)
+collision_layer = 32
+collision_mask = 57
 script = ExtResource("1_faarq")
+speed = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.57079
@@ -80,3 +98,18 @@ target_position = Vector2(50, 0)
 libraries = {
 "": SubResource("AnimationLibrary_12n3o")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+energy = 0.2
+texture = SubResource("GradientTexture2D_8hu0w")
+
+[node name="VehicleNotifierArea" type="Area2D" parent="."]
+scale = Vector2(0.625, 3.962)
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VehicleNotifierArea"]
+position = Vector2(18.3948, 0)
+scale = Vector2(0.999999, 1)
+shape = SubResource("RectangleShape2D_okgie")

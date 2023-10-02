@@ -1,7 +1,7 @@
 class_name Person extends CharacterBody2D
 
 
-@export var speed = 100.0
+@export var speed : float
 @export var acceleration = 100
 
 func _physics_process(delta):
