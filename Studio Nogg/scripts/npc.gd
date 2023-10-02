@@ -12,8 +12,19 @@ var states = ["in_queue", "in_car_entering", "going_into_building", "exiting_bui
 
 
 func handle_movement():
-	if state == "going_into_building":
-		pass
+	var direction = Vector2(0,0)
+	match state:
+		"in_queue":
+			pass
+		"in_car_entering":
+			pass
+		"going_into_building":
+#			direction = Vector2.from_angle(position.angle_to(get_parent().get_node("HotelEntranceMarker").position))
+			pass
+	
+	velocity = velocity.move_toward(direction*speed, acceleration)
+	if velocity.length() > 0:
+		rotation = velocity.angle()
 		
 	
 func check_vehicle():
