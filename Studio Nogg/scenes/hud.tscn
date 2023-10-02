@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5ppj8siv617n"]
+
+[ext_resource type="Script" path="res://scenes/score.gd" id="1_cbjj0"]
+[ext_resource type="FontFile" uid="uid://drnsmlkfcp6yl" path="res://PixelifySans-Regular.ttf" id="1_cpesp"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Score" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 84.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("1_cpesp")
+text = "Tips: 0"
+script = ExtResource("1_cbjj0")

@@ -114,7 +114,10 @@ _data = {
 }
 
 [node name="Bike" type="CharacterBody2D" groups=["Vehicles"]]
+collision_layer = 8
+collision_mask = 40
 script = ExtResource("1_fxkee")
+start_available = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, 0)
@@ -123,7 +126,6 @@ texture = ExtResource("2_ikkpe")
 hframes = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(14, 0)
 polygon = PackedVector2Array(11, 9, -6, 3, -20, 2, -21, -2, -6, -2, -1, -5, 3, -5, 9, -10, 13, -2, 20, 0, 13, 2)
 
@@ -141,3 +143,10 @@ acceleration = 0.2
 
 [node name="EntranceExitMarker" type="Marker2D" parent="."]
 position = Vector2(13, -14)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

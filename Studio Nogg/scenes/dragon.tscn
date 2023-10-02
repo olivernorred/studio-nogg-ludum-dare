@@ -1,0 +1,200 @@
+[gd_scene load_steps=16 format=3 uid="uid://d30bp6m8qbp8y"]
+
+[ext_resource type="Script" path="res://scenes/dragon.gd" id="1_ckkee"]
+[ext_resource type="Texture2D" uid="uid://bsaxem6sb10qe" path="res://Dragon.png" id="2_8tsg4"]
+[ext_resource type="Script" path="res://scripts/randomframe.gd" id="3_vteg7"]
+[ext_resource type="Script" path="res://scripts/driving_component.gd" id="4_s7og7"]
+[ext_resource type="Texture2D" uid="uid://b1ngmmclrqfu4" path="res://SelectionIndicator.png" id="5_4jpyl"]
+
+[sub_resource type="Gradient" id="Gradient_bql4w"]
+offsets = PackedFloat32Array(0, 0.717703)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_72qxc"]
+gradient = SubResource("Gradient_bql4w")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_hpejq"]
+resource_name = "ride"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 2, 5, 3]
+}
+
+[sub_resource type="Animation" id="Animation_tby5l"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 2]
+}
+
+[sub_resource type="Animation" id="Animation_cu67h"]
+resource_name = "turn_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 6]
+}
+
+[sub_resource type="Animation" id="Animation_suube"]
+resource_name = "turn_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 8]
+}
+
+[sub_resource type="Animation" id="Animation_8asqi"]
+resource_name = "empty"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_3vgh8"]
+resource_name = "npc_riding"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 2, 5, 3]
+}
+
+[sub_resource type="Animation" id="Animation_lt2jw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgqse"]
+_data = {
+"RESET": SubResource("Animation_lt2jw"),
+"empty": SubResource("Animation_8asqi"),
+"idle": SubResource("Animation_tby5l"),
+"npc_riding": SubResource("Animation_3vgh8"),
+"ride": SubResource("Animation_hpejq"),
+"turn_left": SubResource("Animation_cu67h"),
+"turn_right": SubResource("Animation_suube")
+}
+
+[node name="Dragon" type="CharacterBody2D" groups=["Vehicles"]]
+collision_layer = 8
+collision_mask = 40
+motion_mode = 1
+script = ExtResource("1_ckkee")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20, 0)
+rotation = 1.5708
+texture = ExtResource("2_8tsg4")
+hframes = 10
+script = ExtResource("3_vteg7")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(20, 0)
+polygon = PackedVector2Array(51, 30, 44, 8, 64, 8, 60, 16, 76, 14, 97, 0, 68, -16, 57, -6, 44, -6, 51, -26, 18, -44, -70, -37, -40, -17, -93, -1, -38, 13, -69, 35, 7, 47)
+
+[node name="DrivingComponent" type="Node2D" parent="."]
+position = Vector2(20, 0)
+script = ExtResource("4_s7og7")
+forward_speed = 2.0
+acceleration = 0.8
+
+[node name="EntranceExitMarker" type="Marker2D" parent="."]
+position = Vector2(20, -28)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -31.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 12.0
+text = "state"
+
+[node name="Person Checker" type="Area2D" parent="."]
+position = Vector2(20, 0)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Person Checker"]
+polygon = PackedVector2Array(51, 30, 44, 8, 64, 8, 60, 16, 76, 14, 97, 0, 68, -16, 57, -6, 44, -6, 51, -26, 18, -44, -70, -37, -40, -17, -93, -1, -38, 13, -69, 35, 7, 47)
+
+[node name="SelectionIndicator" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, 0)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("5_4jpyl")
+
+[node name="PointLight2D" type="PointLight2D" parent="SelectionIndicator"]
+position = Vector2(-1.6, 0)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("GradientTexture2D_72qxc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mgqse")
+}
+
+[connection signal="area_entered" from="Person Checker" to="." method="_on_person_checker_area_entered"]
+[connection signal="area_exited" from="Person Checker" to="." method="_on_person_checker_area_exited"]

@@ -1,27 +1,141 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4kbftgyfbhwi"]
+[gd_scene load_steps=13 format=3 uid="uid://b4kbftgyfbhwi"]
 
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_2qyl0"]
-[ext_resource type="Texture2D" uid="uid://44brmeh10a8f" path="res://sprites/whitesquare.png" id="2_prahg"]
+[ext_resource type="Texture2D" uid="uid://ccuy2acbu37lj" path="res://NPCs/NPC1.png" id="2_238vb"]
+[ext_resource type="Script" path="res://scenes/RotationLock.gd" id="3_8br6i"]
+[ext_resource type="FontFile" uid="uid://drnsmlkfcp6yl" path="res://PixelifySans-Regular.ttf" id="4_yre7u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcqm7"]
-size = Vector2(16, 24)
+size = Vector2(10, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s77f8"]
-radius = 54.0
+radius = 18.1108
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ymnha"]
+radius = 12.1655
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ow05"]
+radius = 32.0156
+
+[sub_resource type="Animation" id="Animation_16t1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_q8ckd"]
+resource_name = "idle"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_c0cx0"]
+resource_name = "walk"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_12n3o"]
+_data = {
+"RESET": SubResource("Animation_16t1b"),
+"idle": SubResource("Animation_q8ckd"),
+"walk": SubResource("Animation_c0cx0")
+}
 
 [node name="NPC" type="CharacterBody2D" groups=["NPCs"]]
+collision_layer = 16
+collision_mask = 16
+motion_mode = 1
 script = ExtResource("1_2qyl0")
+speed = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.375)
-texture = ExtResource("2_prahg")
+rotation = 1.57079
+scale = Vector2(2, 2)
+texture = ExtResource("2_238vb")
+hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mcqm7")
 
 [node name="CarChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CarChecker"]
 shape = SubResource("CircleShape2D_s77f8")
 
+[node name="HotelChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HotelChecker"]
+shape = SubResource("CircleShape2D_ymnha")
+
+[node name="WaitingAreaChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaitingAreaChecker"]
+shape = SubResource("CircleShape2D_0ow05")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -53.0
+offset_top = -28.0
+offset_right = 71.0
+offset_bottom = 1.0
+text = "State"
+
+[node name="ExitHotelTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RotationLock" type="Node2D" parent="."]
+script = ExtResource("3_8br6i")
+
+[node name="TipLabel" type="Label" parent="RotationLock"]
+offset_left = -11.0
+offset_top = -34.0
+offset_right = 23.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("4_yre7u")
+text = "$99"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_12n3o")
+}
+
 [connection signal="body_entered" from="CarChecker" to="." method="_on_car_checker_body_entered"]
+[connection signal="area_entered" from="HotelChecker" to="." method="_on_hotel_checker_area_entered"]
+[connection signal="area_entered" from="WaitingAreaChecker" to="." method="_on_waiting_area_checker_area_entered"]
+[connection signal="timeout" from="ExitHotelTimer" to="." method="_on_exit_hotel_timer_timeout"]

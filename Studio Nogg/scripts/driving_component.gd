@@ -11,8 +11,8 @@ var gear = 0
 
 var turn  = 0
 var direction = 0
-
 var velocity = Vector2(0,0)
+
 func _physics_process(delta):
 	if is_active:
 		gear = Input.get_axis("down", "up") if can_reverse else Input.get_action_strength("up")

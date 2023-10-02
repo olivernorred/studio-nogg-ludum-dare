@@ -1,0 +1,128 @@
+[gd_scene load_steps=11 format=3 uid="uid://drr8lu1fib6en"]
+
+[ext_resource type="Script" path="res://scenes/UFO.gd" id="1_r55he"]
+[ext_resource type="Texture2D" uid="uid://cxvlryvmvppjq" path="res://UFO.png" id="2_plnhh"]
+[ext_resource type="Script" path="res://scripts/driving_component.gd" id="3_y03u3"]
+[ext_resource type="Texture2D" uid="uid://b1ngmmclrqfu4" path="res://SelectionIndicator.png" id="4_rfjel"]
+
+[sub_resource type="Gradient" id="Gradient_bql4w"]
+offsets = PackedFloat32Array(0, 0.717703)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_72qxc"]
+gradient = SubResource("Gradient_bql4w")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_d8kxa"]
+resource_name = "go"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_20tcx"]
+resource_name = "idle"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dk27t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aqj07"]
+_data = {
+"RESET": SubResource("Animation_dk27t"),
+"go": SubResource("Animation_d8kxa"),
+"idle": SubResource("Animation_20tcx")
+}
+
+[node name="UFO" type="CharacterBody2D" groups=["Vehicles"]]
+z_index = 10
+collision_layer = 8
+collision_mask = 40
+motion_mode = 1
+script = ExtResource("1_r55he")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = ExtResource("2_plnhh")
+hframes = 5
+
+[node name="DrivingComponent" type="Node2D" parent="."]
+script = ExtResource("3_y03u3")
+forward_speed = 2.0
+reverse_speed = 1.0
+turn_speed = 0.04
+
+[node name="EntranceExitMarker" type="Marker2D" parent="."]
+position = Vector2(40, -51)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -31.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 12.0
+text = "state"
+
+[node name="Person Checker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Person Checker"]
+polygon = PackedVector2Array(47, 0, 44, -6, 37, -14, 0, -16, -29, -14, -40, -7, -48, -3, -48, 2, -40, 7, -30, 13, 2, 17, 34, 13, 41, 7, 46, 5)
+
+[node name="SelectionIndicator" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, 0)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("4_rfjel")
+
+[node name="PointLight2D" type="PointLight2D" parent="SelectionIndicator"]
+position = Vector2(-1.6, 0)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("GradientTexture2D_72qxc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(47, 0, 44, -6, 37, -14, 0, -16, -29, -14, -40, -7, -48, -3, -48, 2, -40, 7, -30, 13, 2, 17, 34, 13, 41, 7, 46, 5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aqj07")
+}
+
+[connection signal="area_entered" from="Person Checker" to="." method="_on_person_checker_area_entered"]
+[connection signal="area_exited" from="Person Checker" to="." method="_on_person_checker_area_exited"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch234yniwkwk7"]
+[gd_scene load_steps=7 format=3 uid="uid://ird4ksexv5st"]
 
-[ext_resource type="Script" path="res://scenes/car.gd" id="1_51l1o"]
-[ext_resource type="Texture2D" uid="uid://dw82q1y36agpr" path="res://Sprite_Hotdog.png" id="2_ie5d1"]
-[ext_resource type="Texture2D" uid="uid://b1ngmmclrqfu4" path="res://SelectionIndicator.png" id="4_gq18d"]
-[ext_resource type="Script" path="res://scripts/driving_component.gd" id="4_h7kvf"]
+[ext_resource type="Script" path="res://scenes/car.gd" id="1_5nqmm"]
+[ext_resource type="Texture2D" uid="uid://bt56cgkommeed" path="res://WeirdVehicle2.png" id="2_a42nj"]
+[ext_resource type="Script" path="res://scripts/driving_component.gd" id="3_wnwow"]
+[ext_resource type="Texture2D" uid="uid://b1ngmmclrqfu4" path="res://SelectionIndicator.png" id="4_egm32"]
 
 [sub_resource type="Gradient" id="Gradient_bql4w"]
 offsets = PackedFloat32Array(0, 0.717703)
@@ -14,26 +14,25 @@ gradient = SubResource("Gradient_bql4w")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="HotDogCar" type="CharacterBody2D" groups=["Vehicles"]]
+[node name="WeirdPinkCar" type="CharacterBody2D" groups=["Vehicles"]]
 collision_layer = 8
 collision_mask = 40
 motion_mode = 1
-script = ExtResource("1_51l1o")
+script = ExtResource("1_5nqmm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(22, 0)
+position = Vector2(19, 0)
 rotation = 1.5708
-texture = ExtResource("2_ie5d1")
+texture = ExtResource("2_a42nj")
 
 [node name="DrivingComponent" type="Node2D" parent="."]
-position = Vector2(22, 0)
-script = ExtResource("4_h7kvf")
-forward_speed = 2.0
-reverse_speed = 1.0
-turn_speed = 0.04
+position = Vector2(19, 0)
+script = ExtResource("3_wnwow")
+turn_speed = 0.07
+acceleration = 0.1
 
 [node name="EntranceExitMarker" type="Marker2D" parent="."]
-position = Vector2(48, -26)
+position = Vector2(41, -76)
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -44,18 +43,18 @@ offset_bottom = 12.0
 text = "state"
 
 [node name="Person Checker" type="Area2D" parent="."]
-position = Vector2(22, 0)
+position = Vector2(19, 0)
 collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Person Checker"]
-polygon = PackedVector2Array(47, 0, 44, -6, 37, -14, 0, -16, -29, -14, -40, -7, -48, -3, -48, 2, -40, 7, -30, 13, 2, 17, 34, 13, 41, 7, 46, 5)
+polygon = PackedVector2Array(47, 31, 41, 21, 12, 11, -4, 0, 5, -15, 36, -18, 44, -24, 47, -34, 41, -46, 2, -47, -25, -34, -29, -8, -46, 0, -31, 8, -23, 33, -2, 46, 31, 48, 44, 44)
 
 [node name="SelectionIndicator" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(1, 0)
 scale = Vector2(0.625, 0.625)
-texture = ExtResource("4_gq18d")
+texture = ExtResource("4_egm32")
 
 [node name="PointLight2D" type="PointLight2D" parent="SelectionIndicator"]
 position = Vector2(-1.6, 0)
@@ -63,8 +62,8 @@ scale = Vector2(1.6, 1.6)
 texture = SubResource("GradientTexture2D_72qxc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(22, 0)
-polygon = PackedVector2Array(47, 0, 44, -6, 37, -14, 0, -16, -29, -14, -40, -7, -48, -3, -48, 2, -40, 7, -30, 13, 2, 17, 34, 13, 41, 7, 46, 5)
+position = Vector2(19, 0)
+polygon = PackedVector2Array(47, 31, 41, 21, 12, 11, -4, 0, 5, -15, 36, -18, 44, -24, 47, -34, 41, -46, 2, -47, -25, -34, -29, -8, -46, 0, -31, 8, -23, 33, -2, 46, 31, 48, 44, 44)
 
 [connection signal="area_entered" from="Person Checker" to="." method="_on_person_checker_area_entered"]
 [connection signal="area_exited" from="Person Checker" to="." method="_on_person_checker_area_exited"]
